@@ -10,10 +10,10 @@ class Conf
     config = OpenStruct.new(config_hash)
 
     config.keys ||= {}
-    config.keys[:up] ||= '8'
-    config.keys[:down] ||= '2'
-    config.keys[:left] ||= '4'
-    config.keys[:right] ||= '6'
+    config.keys[:up] ||= 'k'
+    config.keys[:down] ||= 'j'
+    config.keys[:left] ||= 'h'
+    config.keys[:right] ||= 'l'
     config.keys[:quit] ||= 'q'
 
     config
