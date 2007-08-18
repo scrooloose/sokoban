@@ -43,19 +43,15 @@ class Stage
   end
 
   def board_dimensions
-    @x_dimension ||= begin
-      @pieces.inject(0) do |highest,p| 
-        p.x > highest ? p.x : highest
-      end
-    end
+    @board_dimensions ||= [x_dimension, y_dimension]
+  end
+    
+  def x_dimension
+    @pieces.max {|a,b| a.x <=> b.x}.x
+  end
 
-    @y_dimension ||= begin
-      @pieces.inject(0) do |highest,p| 
-        p.y > highest ? p.y : highest
-      end
-    end
-
-    [@x_dimension, @y_dimension]
+  def y_dimension
+    @pieces.max {|a,b| a.y <=> b.y}.y
   end
 
   def crates
