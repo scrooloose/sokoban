@@ -19,16 +19,16 @@ class Controller
 
       begin
         case key
-        when ?q
+        when AppConfig.keys[:quit][0]
           puts "Quitting"
           break
-        when ?2
+        when AppConfig.keys[:down][0]
           @stage.guy.move_down
-        when ?4
+        when AppConfig.keys[:left][0]
           @stage.guy.move_left
-        when ?6
+        when AppConfig.keys[:right][0]
           @stage.guy.move_right
-        when ?8
+        when AppConfig.keys[:up][0]
           @stage.guy.move_up
         end
       rescue

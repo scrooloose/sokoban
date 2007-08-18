@@ -16,6 +16,10 @@ require 'controllers/controller'
 require 'lib/hacks'
 require 'views/stage_renderer'
 
+require 'lib/conf'
+
+::AppConfig = Conf.init_config("config.yml")
+
 level = ARGV.first || 'level_0.txt'
 
 c = Controller.run(File.join("data", level));
