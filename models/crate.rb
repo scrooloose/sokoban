@@ -7,6 +7,6 @@ class Crate < GamePiece
   
   before_move :moved_by_one?
   def moved_by_one?(xdiff, ydiff)
-    raise MovedTooFar, "The crate got moved too far" if xdiff + ydiff == 1
+    raise MovedTooFar, "The crate got moved too far" unless (xdiff + ydiff).abs == 1
   end
 end
