@@ -29,6 +29,7 @@ class Controller
     done = false
 
     while !done
+      @stage.analyse
       @stage_renderer.render
       key = get_character
 

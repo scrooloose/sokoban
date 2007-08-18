@@ -6,16 +6,12 @@ class StageRenderer
   end
   
   def render
-    x_dim, y_dim = @stage.board_dimensions
-
-    @stage.messages << "ALL RIGHT! YOU WIN YO!!" if @stage.won?
-
     output = ''
-    
     @stage.display_messages do |message|
       output << "#{message}\n"
     end
 
+    x_dim, y_dim = @stage.board_dimensions
     0.upto(y_dim) do |y|
       0.upto(x_dim) do |x|
         pieces = @stage.pieces_for(x, y)

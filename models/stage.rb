@@ -33,6 +33,10 @@ class Stage
     end
     @messages = nil
   end
+  
+  def analyse    
+    messages << "ALL RIGHT! YOU WIN YO!!" if won?
+  end
 
   def pieces_for(x, y)
     @pieces.select{|p| p.x == x && p.y == y}
