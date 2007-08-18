@@ -12,9 +12,9 @@ require 'models/storage_area'
 require 'models/stage'
 require 'models/stage_parser'
 
-require 'controllers/controller.rb'
-require 'lib/hacks.rb'
-require 'views/stage_renderer.rb'
+require 'controllers/controller'
+require 'lib/hacks'
+require 'views/stage_renderer'
 
 level = ARGV.first || 'level_0.txt'
 

@@ -12,28 +12,30 @@ class StageRenderer
 
     puts "ALL RIGHT! YOU WIN YO!!" if @stage.won?
 
+    output = ''
 
     0.upto(y_dim) do |y|
       0.upto(x_dim) do |x|
         pieces = @stage.pieces_for(x, y)
-        putc char_for_pieces(pieces) if pieces.any?
+        output << char_for_pieces(pieces) if pieces.any?
       end
-      putc "\n"
+      output << "\n"
     end
+    puts output
   end
 
   def char_for_pieces(pieces)
     pieces = pieces.map{|x| x.class}
     if pieces.include_all?(Crate, StorageArea)
-      "*"
+      color_text("\e[32;41m", "o")
     elsif pieces.include_all?(Guy, StorageArea)
-      "+"
+      color_text("\e[36;41m", "@")
     elsif pieces.include_all?(Guy, Floor)
-      "@"
+      color_text("\e[36;40m", "@")
     elsif pieces.include?(StorageArea)
-      "."
+      color_text("\e[30;41m", ".")
     elsif pieces.include?(Crate)
-      "o"
+      color_text("\e[32;40m", "o")
     elsif pieces.include?(Wall)
       "#"
     elsif pieces.include?(Floor)
@@ -42,4 +44,9 @@ class StageRenderer
       raise(UnknownPieceCombo, "Dont know how to render [#{pieces}]")
     end
   end
+
+  def color_text(color, text)
+    "#{color}#{text}\e[0m"
+  end
+
 end
