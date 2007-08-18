@@ -59,12 +59,8 @@ class Stage
   end
 
   def won?
-    crates.each do |c|
-      unless pieces_for(c.x, c.y).map{|p| p.class}.include?(StorageArea)
-        return false
-      end
+    crates.all? do |c|
+      pieces_for(c.x, c.y).map{|p| p.class}.include?(StorageArea)
     end
-
-    true
   end
 end
