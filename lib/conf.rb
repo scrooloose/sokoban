@@ -9,14 +9,18 @@ class Conf
     end
     config = OpenStruct.new(config_hash)
 
-    config.keys ||= {}
-    config.keys[:up] ||= 'k'
-    config.keys[:down] ||= 'j'
-    config.keys[:left] ||= 'h'
-    config.keys[:right] ||= 'l'
-    config.keys[:quit] ||= 'q'
-    config.keys[:restart] ||= 'r'
-
+    defaults = {
+      :up       => 'k', 
+      :down     => 'j', 
+      :left     => 'h', 
+      :right    => 'l', 
+      :quit     => 'q', 
+      :restart  => 'r', 
+    }
+    config.keys.reverse_merge!(defaults)
+    config.keys.each do |key,value|
+      config.keys[key] = value.to_s[0]
+    end
     config
   end
 end

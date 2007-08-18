@@ -35,18 +35,18 @@ class Controller
 
       begin
         case key
-        when AppConfig.keys[:quit].to_s[0]
+        when AppConfig.keys[:quit]
           puts "Quitting"
           break
-        when AppConfig.keys[:down].to_s[0]
+        when AppConfig.keys[:down]
           @stage.guy.move_down
-        when AppConfig.keys[:left].to_s[0]
+        when AppConfig.keys[:left]
           @stage.guy.move_left
-        when AppConfig.keys[:right].to_s[0]
+        when AppConfig.keys[:right]
           @stage.guy.move_right
-        when AppConfig.keys[:up].to_s[0]
+        when AppConfig.keys[:up]
           @stage.guy.move_up
-        when AppConfig.keys[:restart].to_s[0]
+        when AppConfig.keys[:restart]
           done = true
           restart_stage
         end
