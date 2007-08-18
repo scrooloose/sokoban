@@ -49,8 +49,9 @@ class Controller
           done = true
           restart_stage
         end
-      rescue
-        #do nothing 
+      rescue Movable::InvalidMoveError
+        $stderr.puts "Cancelled the move" if $DEBUG
+        @stage.messages << "Cancelled the move: #{$!.message}"
       end
     end
   end
