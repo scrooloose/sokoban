@@ -1,5 +1,6 @@
 class GamePiece
   class InvalidLevelCharacter < StandardError; end
+  class GamePieceNotConfigured < StandardError; end
   attr_accessor :x, :y, :stage
 
   def initialize(x, y, stage)
@@ -7,9 +8,17 @@ class GamePiece
     self.y = y
     self.stage = stage
   end
+  
+  def self.represented_by(*chars)
+    raise ArgumentError, "You must provide at least one character" if chars.empty?
+    @represented_by = chars
+  end
 
   def self.represented_by?(char)
-    raise NotImplementedError, "represented_by? has not been implemented"
+    if @represented_by.nil? || @represented_by.empty?
+      raise GamePieceNotConfigured, "This piece doesn't have any characters which represent it"
+    end
+    @represented_by.include?(char)
   end
 
   def self.pieces_for(char, x, y, stage)

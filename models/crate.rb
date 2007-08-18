@@ -1,7 +1,5 @@
 class Crate < MobilePiece
-  def self.represented_by?(char)
-    true if ["o", "*"].include?(char)
-  end
+  represented_by "o", "*"
 
   def valid_new_location?(x, y)
     x_diff = (self.x - x).abs

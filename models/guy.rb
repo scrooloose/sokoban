@@ -1,7 +1,5 @@
 class Guy < MobilePiece
-  def self.represented_by?(char)
-    true if ["@", "+"].include?(char)
-  end
+  represented_by "@", "+"
 
   def valid_new_location?(x, y)
     pieces_on_square = @stage.pieces_for(x,y).map{|p| p.class}

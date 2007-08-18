@@ -1,5 +1,3 @@
 class Wall < GamePiece
-  def self.represented_by?(char)
-    char == "#"
-  end
+  represented_by "#"
 end
