@@ -17,6 +17,7 @@ class Conf
       :quit     => 'q', 
       :restart  => 'r', 
     }
+    config.keys ||= {}
     config.keys.reverse_merge!(defaults)
     config.keys.each do |key,value|
       config.keys[key] = value.to_s[0]
