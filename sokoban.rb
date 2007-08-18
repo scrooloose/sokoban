@@ -3,7 +3,7 @@ gem "highline"
 require "highline/system_extensions"
 
 require 'models/game_piece'
-require 'models/mobile_piece'
+require 'models/movable'
 require 'models/guy'
 require 'models/crate'
 require 'models/floor'

@@ -1,27 +1,16 @@
-class Guy < MobilePiece
+class Guy < GamePiece
   represented_by "@", "+"
-
-  def valid_new_location?(x, y)
-    pieces_on_square = @stage.pieces_for(x,y).map{|p| p.class}
-    !pieces_on_square.include_any?(Wall)
-  end
+  include Movable
+  blocked_by :Wall
 
   def to_s
     "Guy--- X:#{x}, Y:#{y}"
   end
-
-  def move(xdiff, ydiff)
-    xnew, ynew = x + xdiff, y + ydiff
-    unless valid_new_location?(xnew,ynew)
-      raise(InvalidMoveError, "Cannot move guy to #{xnew},#{ynew}")
-    end
-    
-    pieces_on_square = @stage.pieces_for(xnew, ynew)
-    pieces_on_square.each do |piece|
+  
+  before_move :move_crates
+  def move_crates(xdiff, ydiff)
+    @stage.pieces_for(*position_for(xdiff, ydiff)).each do |piece|
       piece.move(xdiff, ydiff) if piece.instance_of? Crate
-    end
-
-    self.x = xnew
-    self.y = ynew
+    end  
   end
 end
