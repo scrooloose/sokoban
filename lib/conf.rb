@@ -15,6 +15,7 @@ class Conf
     config.keys[:left] ||= 'h'
     config.keys[:right] ||= 'l'
     config.keys[:quit] ||= 'q'
+    config.keys[:restart] ||= 'r'
 
     config
   end
