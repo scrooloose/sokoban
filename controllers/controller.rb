@@ -51,7 +51,7 @@ class Controller
           restart_stage
         end
       rescue
-        puts "Illegal move yo"
+        #do nothing 
       end
     end
   end
