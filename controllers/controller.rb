@@ -12,23 +12,17 @@ class Controller
       raise(InvalidStageName, "No stage with filename #{name} found")
     end
     @stage_filename = name
-    start_stage
-  end
-
-  def start_stage
-    @stage = Stage.parse(open(@stage_filename).readlines)
-    @stage_renderer = StageRenderer.new(@stage)
+    load_stage
     key_loop
   end
 
-  def restart_stage
-    start_stage
+  def load_stage
+    @stage = Stage.parse(open(@stage_filename).readlines)
+    @stage_renderer = StageRenderer.new(@stage)
   end
 
   def key_loop
-    done = false
-
-    while !done
+    loop do
       @stage.analyse
       @stage_renderer.render
       key = get_character
@@ -47,8 +41,8 @@ class Controller
         when AppConfig.keys[:up]
           @stage.guy.move_up
         when AppConfig.keys[:restart]
-          done = true
-          restart_stage
+          load_stage
+          @stage.messages << "The game has been restarted"
         end
       rescue Movable::InvalidMoveError
         $stderr.puts "Cancelled the move" if $DEBUG
