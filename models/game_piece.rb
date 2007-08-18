@@ -16,7 +16,7 @@ class GamePiece
 
   def self.represented_by?(char)
     if @represented_by.nil? || @represented_by.empty?
-      raise GamePieceNotConfigured, "This piece doesn't have any characters which represent it"
+      raise GamePieceNotConfigured, "This piece (#{self}) doesn't have any characters which represent it"
     end
     @represented_by.include?(char)
   end
