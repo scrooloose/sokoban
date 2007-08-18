@@ -26,7 +26,6 @@ class Controller
   end
 
   def key_loop
-    
     done = false
 
     while !done

@@ -30,7 +30,6 @@ class Stage
         p.x > highest ? p.x : highest
       end
     end
-    @x_dimension
 
     @y_dimension ||= begin
       @pieces.inject(0) do |highest,p| 
@@ -44,7 +43,6 @@ class Stage
   def crates
     @crates ||= pieces.select{|p| p.instance_of?(Crate)}
   end
-
 
   def won?
     crates.each do |c|
