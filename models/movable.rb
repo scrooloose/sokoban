@@ -46,8 +46,7 @@ module Movable
     xnew, ynew = position_for(xdiff, ydiff)
     raise(InvalidMoveError, "Cannot move #{self.class} to #{xnew}, #{ynew}") unless blocked?(xnew, ynew)
     send(self.class.before_move_callback, xdiff, ydiff) if self.class.before_move_callback
-    self.x = xnew
-    self.y = ynew
+    @x, @y = xnew, ynew
   end
   
   def blocked?(xnew, ynew)

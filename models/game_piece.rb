@@ -1,12 +1,10 @@
 class GamePiece
   class InvalidLevelCharacter < StandardError; end
   class GamePieceNotConfigured < StandardError; end
-  attr_accessor :x, :y, :stage
+  attr_reader :x, :y, :stage
 
   def initialize(x, y, stage)
-    self.x = x
-    self.y = y
-    self.stage = stage
+    @x, @y, @stage = x, y, stage
   end
   
   def self.represented_by(*chars)
