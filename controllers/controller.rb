@@ -16,7 +16,7 @@ class Controller
   end
 
   def start_stage
-    @stage = StageParser.parse(open(@stage_filename).readlines)
+    @stage = Stage.parse(open(@stage_filename).readlines)
     @stage_renderer = StageRenderer.new(@stage)
     key_loop
   end

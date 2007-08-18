@@ -10,7 +10,6 @@ require 'models/floor'
 require 'models/wall'
 require 'models/storage_area'
 require 'models/stage'
-require 'models/stage_parser'
 
 require 'controllers/controller'
 require 'lib/hacks'
