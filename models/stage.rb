@@ -43,15 +43,15 @@ class Stage
   end
 
   def board_dimensions
-    @board_dimensions ||= [x_dimension, y_dimension]
+    [x_dimension, y_dimension]
   end
     
   def x_dimension
-    @pieces.max {|a,b| a.x <=> b.x}.x
+    @x_dimension ||= @pieces.max {|a,b| a.x <=> b.x}.x
   end
 
   def y_dimension
-    @pieces.max {|a,b| a.y <=> b.y}.y
+    @y_dimension ||= @pieces.max {|a,b| a.y <=> b.y}.y
   end
 
   def crates

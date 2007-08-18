@@ -8,9 +8,8 @@ class StageRenderer
   def render
     output = ''
     
-    x_dim, y_dim = @stage.board_dimensions
-    0.upto(y_dim) do |y|
-      0.upto(x_dim) do |x|
+    0.upto(@stage.y_dimension) do |y|
+      0.upto(@stage.x_dimension) do |x|
         pieces = @stage.pieces_for(x, y)
         output << char_for_pieces(pieces) if pieces.any?
       end
