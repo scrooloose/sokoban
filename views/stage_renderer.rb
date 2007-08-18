@@ -7,10 +7,7 @@ class StageRenderer
   
   def render
     output = ''
-    @stage.display_messages do |message|
-      output << "#{message}\n"
-    end
-
+    
     x_dim, y_dim = @stage.board_dimensions
     0.upto(y_dim) do |y|
       0.upto(x_dim) do |x|
@@ -18,6 +15,11 @@ class StageRenderer
         output << char_for_pieces(pieces) if pieces.any?
       end
       output << "\n"
+    end
+    
+    output << "\n"
+    @stage.display_messages do |message|
+      output << "#{message}\n"
     end
 
     system("clear")
