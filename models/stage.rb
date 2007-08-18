@@ -9,6 +9,16 @@ class Stage
     @guy ||= pieces.select{|p| p.instance_of? Guy}.first
   end
 
+  def messages
+    @messages ||= []
+  end
+  
+  def display_messages
+    messages.each do |m|
+      yield m
+    end
+    @messages = nil
+  end
 
   def pieces_for(x, y)
     @pieces.select{|p| p.x == x && p.y == y}
