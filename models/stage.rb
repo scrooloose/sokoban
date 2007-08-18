@@ -34,7 +34,7 @@ class Stage
     @messages = nil
   end
   
-  def analyse    
+  def analyse
     messages << "ALL RIGHT! YOU WIN YO!!" if won?
   end
 
