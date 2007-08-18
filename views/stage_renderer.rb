@@ -8,8 +8,6 @@ class StageRenderer
   def render
     x_dim, y_dim = @stage.board_dimensions
 
-    system("clear")
-
     puts "ALL RIGHT! YOU WIN YO!!" if @stage.won?
 
     output = ''
@@ -21,6 +19,8 @@ class StageRenderer
       end
       output << "\n"
     end
+
+    system("clear")
     puts output
   end
 
