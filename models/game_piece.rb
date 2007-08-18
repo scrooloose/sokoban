@@ -1,3 +1,5 @@
+require 'set'
+
 class GamePiece
   class InvalidLevelCharacter < StandardError; end
   class GamePieceNotConfigured < StandardError; end
@@ -5,6 +7,14 @@ class GamePiece
 
   def initialize(x, y, stage)
     @x, @y, @stage = x, y, stage
+  end
+
+  def self.piece_classes
+    @piece_classes ||= Set.new
+  end
+
+  def self.inherited(base)
+    piece_classes << base
   end
   
   def self.represented_by(*chars)
@@ -21,7 +31,7 @@ class GamePiece
 
   def self.pieces_for(char, x, y, stage)
     pieces = []
-    [Guy, Crate, Wall, StorageArea, Floor].each do |klass|
+    piece_classes.each do |klass|
       pieces << klass.new(x, y, stage) if klass.represented_by?(char)
     end
 
