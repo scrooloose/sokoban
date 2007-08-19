@@ -44,13 +44,13 @@ module Movable
 
   def move(xdiff, ydiff)
     xnew, ynew = position_for(xdiff, ydiff)
-    raise(InvalidMoveError, "Cannot move #{self.class} to #{xnew}, #{ynew}") unless blocked?(xnew, ynew)
+    raise(InvalidMoveError, "Cannot move #{self.class} to #{xnew}, #{ynew}") if blocked?(xnew, ynew)
     send(self.class.before_move_callback, xdiff, ydiff) if self.class.before_move_callback
     @x, @y = xnew, ynew
   end
   
   def blocked?(xnew, ynew)
     pieces_on_square = @stage.pieces_for(xnew, ynew).map {|p| p.class}
-    !pieces_on_square.include_any? *self.class.blockers
+    pieces_on_square.include_any? *self.class.blockers
   end
 end
