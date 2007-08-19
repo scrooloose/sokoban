@@ -1,0 +1,8 @@
+Required gems:
+    highline
+
+Usage:
+    ruby sokoban.rb [level_name]
+
+level_name: any of the filenames in the data/ directory
+

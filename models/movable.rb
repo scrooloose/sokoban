@@ -49,8 +49,8 @@ module Movable
     @x, @y = xnew, ynew
   end
   
-  def blocked?(xnew, ynew)
-    pieces_on_square = @stage.pieces_for(xnew, ynew).map {|p| p.class}
+  def blocked?(x, y)
+    pieces_on_square = @stage.pieces_for(x, y).map {|p| p.class}
     pieces_on_square.include_any? *self.class.blockers
   end
 end
