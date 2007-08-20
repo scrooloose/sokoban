@@ -1,9 +1,15 @@
 class StageRenderer
   class UnknownPieceCombo < StandardError; end
+  include HighLine::SystemExtensions
 
   def initialize(stage)
     @stage = stage
   end
+
+  def after_keypress(&block)
+    @after_keypress_callback = block
+  end
+  attr_reader :after_keypress_callback
   
   def render
     output = ''
@@ -49,5 +55,20 @@ class StageRenderer
   def color_text(color, text)
     "#{color}#{text}\e[0m"
   end
+
+  def main_loop
+    @done = false
+    while !@done
+      render
+      key = get_character
+      @after_keypress_callback.call(key)
+    end
+  end
+
+  def kill_main_loop
+    @done = true
+  end
+
+
 
 end
