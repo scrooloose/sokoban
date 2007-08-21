@@ -4,6 +4,7 @@ class StageRenderer
 
   def initialize(stage)
     @stage = stage
+    @show_help = false
   end
 
   def after_keypress(&block)
@@ -28,11 +29,16 @@ class StageRenderer
       output << "#{message}\n"
     end
 
-    output << "\n\n#{keys_description}\n"
+    output << "\n\n#{help_string}\n"
 
     system("clear")
     puts output
   end
+
+  def toggle_help
+    @show_help = !@show_help
+  end
+
 
   def char_for_pieces(pieces)
     pieces = pieces.map{|x| x.class}
@@ -63,17 +69,21 @@ class StageRenderer
     color_text("\e[1;31;40m", text)
   end
 
-
-  def keys_description
+  def help_string
     keys = AppConfig.keys.dup
     keys.each {|k,v| keys[k] = v.chr}
 
-    output =  "Movement keys:\n"
-    output << "        #{red(keys[:up])}\n"
-    output << "     #{red(keys[:left])}     #{red(keys[:right])}\n"
-    output << "        #{red(keys[:down])}\n\n"
-    output << "Restart: #{red(keys[:restart])}\n"
-    output << "Quit: #{red(keys[:quit])}\n"
+    if @show_help
+      output =  "Movement keys:\n"
+      output << "        #{red(keys[:up])}\n"
+      output << "     #{red(keys[:left])}     #{red(keys[:right])}\n"
+      output << "        #{red(keys[:down])}\n\n"
+      output << "Quit: #{red(keys[:quit])}\n"
+      output << "Restart: #{red(keys[:restart])}\n"
+      output << "Toggle help: #{red(keys[:help])}"
+    else
+      output =  "Press #{red(keys[:help])} for help"
+    end
     output
   end
 
