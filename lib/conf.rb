@@ -16,6 +16,7 @@ class Conf
       :right    => 'l', 
       :quit     => 'q', 
       :restart  => 'r', 
+      :help     => '?', 
     }
     config.keys ||= {}
     config.keys.reverse_merge!(defaults)
