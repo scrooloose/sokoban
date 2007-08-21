@@ -23,6 +23,7 @@ class StageRenderer
     end
     
     output << "\n"
+    @stage.analyse
     @stage.display_messages do |message|
       output << "#{message}\n"
     end
@@ -68,7 +69,5 @@ class StageRenderer
   def kill_main_loop
     @done = true
   end
-
-
 
 end
