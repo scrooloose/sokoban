@@ -36,6 +36,8 @@ class Controller
         @stage.guy.move_right
       when AppConfig.keys[:up]
         @stage.guy.move_up
+      when AppConfig.keys[:help]
+        @stage_renderer.toggle_help
       when AppConfig.keys[:restart]
         @stage_renderer.kill_main_loop
         load_stage
