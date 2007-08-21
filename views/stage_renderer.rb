@@ -28,6 +28,8 @@ class StageRenderer
       output << "#{message}\n"
     end
 
+    output << "\n\n#{keys_description}\n"
+
     system("clear")
     puts output
   end
@@ -55,6 +57,24 @@ class StageRenderer
 
   def color_text(color, text)
     "#{color}#{text}\e[0m"
+  end
+
+  def red(text)
+    color_text("\e[1;31;40m", text)
+  end
+
+
+  def keys_description
+    keys = AppConfig.keys.dup
+    keys.each {|k,v| keys[k] = v.chr}
+
+    output =  "Movement keys:\n"
+    output << "        #{red(keys[:up])}\n"
+    output << "     #{red(keys[:left])}     #{red(keys[:right])}\n"
+    output << "        #{red(keys[:down])}\n\n"
+    output << "Restart: #{red(keys[:restart])}\n"
+    output << "Quit: #{red(keys[:quit])}\n"
+    output
   end
 
   def main_loop
