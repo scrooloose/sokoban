@@ -23,6 +23,7 @@ class Controller
   %w(up down left right).each do |direction|
     method = "move_#{direction}"
     define_method(method) do
+      return if @stage.won?
       begin
         @stage.guy.send(method)
       rescue Movable::InvalidMoveError
