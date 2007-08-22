@@ -16,37 +16,32 @@ class Controller
 
   def load_stage
     @stage = Stage.parse(open(@stage_filename).readlines)
-    @stage_renderer = StageRenderer.new(@stage)
-    @stage_renderer.after_keypress do |key|
-      key_pressed(key)
-    end
+    @stage_renderer = StageRenderer.new(@stage, self)
     @stage_renderer.main_loop
   end
 
-  def key_pressed(key)
-    begin
-      case key
-      when AppConfig.keys[:quit]
-        @stage_renderer.kill_main_loop
-      when AppConfig.keys[:down]
-        @stage.guy.move_down
-      when AppConfig.keys[:left]
-        @stage.guy.move_left
-      when AppConfig.keys[:right]
-        @stage.guy.move_right
-      when AppConfig.keys[:up]
-        @stage.guy.move_up
-      when AppConfig.keys[:help]
-        @stage_renderer.toggle_help
-      when AppConfig.keys[:restart]
-        @stage_renderer.kill_main_loop
-        load_stage
-        @stage.messages << "The game has been restarted"
+  %w(up down left right).each do |direction|
+    method = "move_#{direction}"
+    define_method(method) do
+      begin
+        @stage.guy.send(method)
+      rescue Movable::InvalidMoveError
       end
-    rescue Movable::InvalidMoveError
-      $stderr.puts "Cancelled the move" if $DEBUG
-      @stage.messages << "Cancelled the move: #{$!.message}"
     end
+  end
+
+  def restart
+    @stage_renderer.kill_main_loop
+    load_stage
+    @stage.messages << "The game has been restarted"
+  end
+
+  def quit
+    @stage_renderer.kill_main_loop
+  end
+
+  def toggle_help
+    @stage_renderer.toggle_help
   end
 
 end
