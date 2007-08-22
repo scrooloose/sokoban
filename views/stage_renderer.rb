@@ -2,15 +2,11 @@ class StageRenderer
   class UnknownPieceCombo < StandardError; end
   include HighLine::SystemExtensions
 
-  def initialize(stage)
+  def initialize(stage, controller)
+    @controller = controller
     @stage = stage
     @show_help = false
   end
-
-  def after_keypress(&block)
-    @after_keypress_callback = block
-  end
-  attr_reader :after_keypress_callback
   
   def render
     output = ''
@@ -38,7 +34,6 @@ class StageRenderer
   def toggle_help
     @show_help = !@show_help
   end
-
 
   def char_for_pieces(pieces)
     pieces = pieces.map{|x| x.class}
@@ -92,7 +87,23 @@ class StageRenderer
     while !@done
       render
       key = get_character
-      @after_keypress_callback.call(key)
+
+      case key
+      when AppConfig.keys[:quit]
+        @controller.quit
+      when AppConfig.keys[:down]
+        @controller.move_down
+      when AppConfig.keys[:left]
+        @controller.move_left
+      when AppConfig.keys[:right]
+        @controller.move_right
+      when AppConfig.keys[:up]
+        @controller.move_up
+      when AppConfig.keys[:help]
+        @controller.toggle_help
+      when AppConfig.keys[:restart]
+        @controller.restart
+      end
     end
   end
 
