@@ -12,6 +12,8 @@ class StageChooser
       m.choices(*stage_names)
       m.flow = :columns_down
       m.list_option = 3
+      m.responses[:no_completion] = "Please enter a stage number"
+      m.responses[:ambiguous_completion] = "Please enter a stage number"
     end
   end
 end
