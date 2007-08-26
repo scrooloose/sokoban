@@ -9,7 +9,7 @@ class StageRenderer
   end
   
   def render
-    output = ''
+    output = "#{File.basename(@controller.stage_filename)}\n\n"
     
     0.upto(@stage.y_dimension) do |y|
       0.upto(@stage.x_dimension) do |x|

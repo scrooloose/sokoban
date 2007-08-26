@@ -1,6 +1,8 @@
 class Controller
   class InvalidStageName < StandardError; end
 
+  attr_reader :stage_filename
+
   def self.run(name)
     new(name)
     nil
