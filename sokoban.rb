@@ -28,5 +28,5 @@ require 'lib/conf'
 if level = ARGV.first 
   c = Controller.run(File.join("data", level));
 else
-  StageSelectionController.choose_stage
+  StageSelectionController.run
 end

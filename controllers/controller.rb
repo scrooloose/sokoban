@@ -47,7 +47,7 @@ class Controller
 
   def choose_stage
     @stage_renderer.kill_main_loop
-    StageSelectionController.choose_stage
+    StageSelectionController.run
   end
 
 
