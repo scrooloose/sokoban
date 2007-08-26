@@ -9,7 +9,7 @@ class StageRenderer
   end
   
   def render
-    output = "#{File.basename(@stage.filename)}\n\n"
+    output = "#{red(File.basename(@stage.filename))}\n\n"
     
     0.upto(@stage.y_dimension) do |y|
       0.upto(@stage.x_dimension) do |x|
