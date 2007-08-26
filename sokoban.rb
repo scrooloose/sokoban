@@ -3,6 +3,9 @@ gem "highline"
 require "highline"
 require "highline/system_extensions"
 
+require 'lib/hacks'
+require 'lib/conf'
+require 'lib/colorable'
 
 require 'models/game_piece'
 require 'models/movable'
@@ -18,9 +21,6 @@ require 'controllers/stage_selection_controller'
 
 require 'views/stage_renderer'
 require 'views/stage_chooser'
-
-require 'lib/hacks'
-require 'lib/conf'
 
 ::AppConfig = Conf.init_config("config.yml")
 
