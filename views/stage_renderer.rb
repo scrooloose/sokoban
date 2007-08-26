@@ -1,6 +1,7 @@
 class StageRenderer
   class UnknownPieceCombo < StandardError; end
   include HighLine::SystemExtensions
+  include Colorable
 
   def initialize(stage, controller)
     @controller = controller
@@ -9,7 +10,7 @@ class StageRenderer
   end
   
   def render
-    output = "#{red(File.basename(@stage.filename))}\n\n"
+    output = "#{cyan(File.basename(@stage.filename))}\n\n"
     
     0.upto(@stage.y_dimension) do |y|
       0.upto(@stage.x_dimension) do |x|
@@ -42,11 +43,11 @@ class StageRenderer
     elsif pieces.include_all?(Guy, StorageArea)
       color_text("\e[1;35;46m", "@")
     elsif pieces.include_all?(Guy, Floor)
-      color_text("\e[1;35;40m", "@")
+      magenta("@")
     elsif pieces.include?(StorageArea)
       color_text("\e[1;30;46m", ".")
     elsif pieces.include?(Crate)
-      color_text("\e[1;32;40m", "o")
+      green("o")
     elsif pieces.include?(Wall)
       "#"
     elsif pieces.include?(Floor)
@@ -54,14 +55,6 @@ class StageRenderer
     else
       raise(UnknownPieceCombo, "Dont know how to render [#{pieces}]")
     end
-  end
-
-  def color_text(color, text)
-    "#{color}#{text}\e[0m"
-  end
-
-  def red(text)
-    color_text("\e[1;31;40m", text)
   end
 
   def help_string
