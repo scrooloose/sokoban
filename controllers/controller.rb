@@ -45,4 +45,10 @@ class Controller
     @stage_renderer.toggle_help
   end
 
+  def choose_stage
+    @stage_renderer.kill_main_loop
+    StageSelectionController.choose_stage
+  end
+
+
 end

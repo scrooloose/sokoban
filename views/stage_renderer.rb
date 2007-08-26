@@ -103,6 +103,8 @@ class StageRenderer
         @controller.toggle_help
       when AppConfig.keys[:restart]
         @controller.restart
+      when AppConfig.keys[:choose_stage]
+        @controller.choose_stage
       end
     end
   end

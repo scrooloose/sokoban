@@ -10,13 +10,14 @@ class Conf
     config = OpenStruct.new(config_hash)
 
     defaults = {
-      :up       => 'k', 
-      :down     => 'j', 
-      :left     => 'h', 
-      :right    => 'l', 
-      :quit     => 'q', 
-      :restart  => 'r', 
-      :help     => '?', 
+      :up           => 'k', 
+      :down         => 'j', 
+      :left         => 'h', 
+      :right        => 'l', 
+      :quit         => 'q', 
+      :restart      => 'r', 
+      :help         => '?', 
+      :choose_stage => 's', 
     }
     config.keys ||= {}
     config.keys.reverse_merge!(defaults)
