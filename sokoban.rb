@@ -24,6 +24,9 @@ require 'lib/conf'
 
 ::AppConfig = Conf.init_config("config.yml")
 
-level = ARGV.first || 'level_0.txt'
 
-c = Controller.run(File.join("data", level));
+if level = ARGV.first 
+  c = Controller.run(File.join("data", level));
+else
+  StageSelectionController.choose_stage
+end
