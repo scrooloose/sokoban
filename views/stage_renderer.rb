@@ -75,6 +75,7 @@ class StageRenderer
       output << "        #{red(keys[:down])}\n\n"
       output << "Quit: #{red(keys[:quit])}\n"
       output << "Restart: #{red(keys[:restart])}\n"
+      output << "Choose stage: #{red(keys[:choose_stage])}\n"
       output << "Toggle help: #{red(keys[:help])}"
     else
       output =  "Press #{red(keys[:help])} for help"
