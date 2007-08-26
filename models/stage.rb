@@ -12,6 +12,11 @@ class Stage
     s.pieces = pieces.flatten
     s
   end
+
+  def self.files
+    Dir.glob(File.join("data", "*txt"))
+  end
+
   
   attr_accessor :pieces
 
