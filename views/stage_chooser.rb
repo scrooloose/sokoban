@@ -1,4 +1,6 @@
 class StageChooser
+  include Colorable
+
   def initialize(files)
     @choices = files.sort
   end
@@ -7,7 +9,7 @@ class StageChooser
     stage_names = @choices.map{|f| File.basename(f)}
 
     system("clear")
-    puts "Pick a stage:\n\n"
+    puts yellow("Pick a stage:\n\n")
     HighLine.new.choose do |m|
       m.choices(*stage_names)
       m.flow = :columns_down
