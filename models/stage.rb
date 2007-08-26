@@ -1,13 +1,23 @@
 class Stage
-  def self.parse(lines)
+  class InvalidStageName < StandardError; end
+
+  attr_reader :filename
+
+  def self.parse(filename)
+    unless File.exist?(filename)
+      raise(InvalidStageName, "No stage with filename #{filename} found")
+    end
+
     s = new
     pieces = []
-    lines.each_with_index do |line, line_index|
+    open(filename).readlines.each_with_index do |line, line_index|
       line = line.to_char_array.reject{|c| c == "\n"}
       line.each_with_index do |char, char_index|
         pieces << GamePiece.pieces_for(char, char_index, line_index, s)
       end
     end
+
+    s.instance_variable_set(:@filename, filename)
 
     s.pieces = pieces.flatten
     s

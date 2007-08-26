@@ -1,23 +1,16 @@
 class Controller
-  class InvalidStageName < StandardError; end
-
-  attr_reader :stage_filename
-
   def self.run(name)
     new(name)
     nil
   end
   
   def initialize(name)
-    unless File.exist?(name)
-      raise(InvalidStageName, "No stage with filename #{name} found")
-    end
     @stage_filename = name
     load_stage
   end
 
   def load_stage
-    @stage = Stage.parse(open(@stage_filename).readlines)
+    @stage = Stage.parse(@stage_filename)
     @stage_renderer = StageRenderer.new(@stage, self)
     @stage_renderer.main_loop
   end
