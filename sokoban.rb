@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require "rubygems"
 gem "highline"
 require "highline"
