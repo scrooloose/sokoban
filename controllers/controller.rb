@@ -5,12 +5,7 @@ class Controller
   end
   
   def initialize(name)
-    @stage_filename = name
-    load_stage
-  end
-
-  def load_stage
-    @stage = Stage.parse(@stage_filename)
+    @stage = Stage.new(name)
     @stage_renderer = StageRenderer.new(@stage, self)
     @stage_renderer.main_loop
   end
@@ -27,8 +22,7 @@ class Controller
   end
 
   def restart
-    @stage_renderer.kill_main_loop
-    load_stage
+    @stage.reset!
     @stage.messages << "The game has been restarted"
   end
 
@@ -44,6 +38,5 @@ class Controller
     @stage_renderer.kill_main_loop
     StageSelectionController.run
   end
-
 
 end
