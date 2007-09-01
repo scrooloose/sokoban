@@ -38,4 +38,9 @@ class GamePiece
     raise(InvalidLevelCharacter, "Invalid character: \"#{char}\"") if pieces.empty?
     pieces
   end
+
+  def to_s
+    "#{self.class.name} (#{x}, #{y})"
+  end
+
 end
