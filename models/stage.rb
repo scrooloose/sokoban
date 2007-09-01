@@ -31,7 +31,7 @@ class Stage
   end
 
   def reset!
-    @pieces, @guy, @messages, @crates = nil
+    @pieces, @guy, @messages, @crates = nil, nil, nil
   end
 
   def guy
