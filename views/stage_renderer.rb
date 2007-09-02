@@ -1,7 +1,6 @@
 class StageRenderer
   class UnknownPieceCombo < StandardError; end
   include HighLine::SystemExtensions
-  include Colorable
 
   def initialize(stage, controller)
     @controller = controller
@@ -10,7 +9,7 @@ class StageRenderer
   end
   
   def render
-    output = yellow "#{(File.basename(@stage.filename))}\n\n"
+    output = "#{(File.basename(@stage.filename))}\n\n".color(:fg => :yellow)
     
     0.upto(@stage.y_dimension) do |y|
       0.upto(@stage.x_dimension) do |x|
@@ -39,15 +38,15 @@ class StageRenderer
   def char_for_pieces(pieces)
     pieces = pieces.map{|x| x.class}
     if pieces.include_all?(Crate, StorageArea)
-      color_text("\e[1;32;46m", "o")
+      "o".color(:fg => :green, :bg => :cyan)
     elsif pieces.include_all?(Guy, StorageArea)
-      color_text("\e[1;35;46m", "@")
+      "@".color(:fg => :magenta, :bg => :cyan)
     elsif pieces.include_all?(Guy, Floor)
-      magenta("@")
+      "@".color(:fg => :magenta)
     elsif pieces.include?(StorageArea)
-      color_text("\e[1;30;46m", ".")
+      ".".color(:bg => :cyan)
     elsif pieces.include?(Crate)
-      green("o")
+      "o".color(:fg => :green)
     elsif pieces.include?(Wall)
       "#"
     elsif pieces.include?(Floor)
@@ -63,15 +62,15 @@ class StageRenderer
 
     if @show_help
       output =  "Movement keys:\n"
-      output << "        #{red(keys[:up])}\n"
-      output << "     #{red(keys[:left])}     #{red(keys[:right])}\n"
-      output << "        #{red(keys[:down])}\n\n"
-      output << "Quit: #{red(keys[:quit])}\n"
-      output << "Restart: #{red(keys[:restart])}\n"
-      output << "Choose stage: #{red(keys[:choose_stage])}\n"
-      output << "Toggle help: #{red(keys[:help])}"
+      output << "        #{keys[:up].color(:fg => :red)}\n"
+      output << "     #{keys[:left].color(:fg => :red)}     #{keys[:right].color(:fg => :red)}\n"
+      output << "        #{keys[:down].color(:fg => :red)}\n\n"
+      output << "Quit: #{keys[:quit].color(:fg => :red)}\n"
+      output << "Restart: #{keys[:restart].color(:fg => :red)}\n"
+      output << "Choose stage: #{keys[:choose_stage].color(:fg => :red)}\n"
+      output << "Toggle help: #{keys[:help].color(:fg => :red)}"
     else
-      output =  "Press #{red(keys[:help])} for help"
+      output =  "Press #{keys[:help].color(:fg => :red)} for help"
     end
     output
   end

@@ -6,6 +6,20 @@ class String
     end
     a
   end
+
+  def color(options = {})
+    color = ""
+    if options[:fg]
+      color << HighLine.const_get(options[:fg].to_s.upcase)
+    end
+
+    if options[:bg]
+      color << HighLine.const_get("ON_#{options[:bg].to_s.upcase}")
+    end
+
+    "#{HighLine::BOLD}#{color}#{self}#{HighLine::RESET}"
+  end
+
 end
 
 class Array
@@ -33,3 +47,4 @@ class Hash
     replace(reverse_merge(other_hash))
   end
 end
+

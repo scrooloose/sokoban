@@ -7,7 +7,6 @@ require "highline/system_extensions"
 
 require 'lib/hacks'
 require 'lib/conf'
-require 'lib/colorable'
 
 require 'models/game_piece'
 require 'models/movable'
