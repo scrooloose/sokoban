@@ -8,6 +8,10 @@ class String
   end
 
   def color(options = {})
+    if options.is_a? Symbol
+      options = {:fg => options}
+    end
+
     color = ""
     if options[:fg]
       color << HighLine.const_get(options[:fg].to_s.upcase)
