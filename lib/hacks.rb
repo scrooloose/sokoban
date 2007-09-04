@@ -1,4 +1,6 @@
 class String
+  class InvalidColorError < StandardError; end
+
   def to_char_array
     a = []
     each_byte do |b|
@@ -14,14 +16,19 @@ class String
 
     color = ""
     if options[:fg]
-      color << HighLine.const_get(options[:fg].to_s.upcase)
+      fg = options[:fg].to_s.upcase
+      raise(InvalidColorError, "Invalid foreground color '#{options[:fg]}'") unless HighLine.constants.include?(fg)
+      color << HighLine.const_get(fg)
     end
 
     if options[:bg]
-      color << HighLine.const_get("ON_#{options[:bg].to_s.upcase}")
+      bg = "ON_#{options[:bg].to_s.upcase}"
+      raise(InvalidColorError, "Invalid background color '#{options[:bg]}'") unless HighLine.constants.include?(bg)
+      color << HighLine.const_get(bg)
     end
 
     "#{HighLine::BOLD}#{color}#{self}#{HighLine::RESET}"
+
   end
 
 end
