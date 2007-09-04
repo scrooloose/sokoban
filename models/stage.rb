@@ -50,7 +50,7 @@ class Stage
   end
   
   def analyse
-    messages << "ALL RIGHT! YOU WIN YO!!" if won?
+    messages << "ALL ".color(:red) + "RIGHT! ".color(:magenta) + "YOU ".color(:green) + "WIN".color(:blue) + "!".color(:yellow) + "!".color(:cyan) if won?
   end
 
   def pieces_for(x, y)
