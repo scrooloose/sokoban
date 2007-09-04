@@ -9,7 +9,7 @@ class StageRenderer
   end
   
   def render
-    output = "#{(File.basename(@stage.filename))}\n\n".color(:fg => :yellow)
+    output = "#{(File.basename(@stage.filename))}\n\n".color(:yellow)
     
     0.upto(@stage.y_dimension) do |y|
       0.upto(@stage.x_dimension) do |x|
@@ -42,11 +42,11 @@ class StageRenderer
     elsif pieces.include_all?(Guy, StorageArea)
       "@".color(:fg => :magenta, :bg => :cyan)
     elsif pieces.include_all?(Guy, Floor)
-      "@".color(:fg => :magenta)
+      "@".color(:magenta)
     elsif pieces.include?(StorageArea)
       ".".color(:bg => :cyan)
     elsif pieces.include?(Crate)
-      "o".color(:fg => :green)
+      "o".color(:green)
     elsif pieces.include?(Wall)
       "#"
     elsif pieces.include?(Floor)
@@ -62,15 +62,15 @@ class StageRenderer
 
     if @show_help
       output =  "Movement keys:\n"
-      output << "        #{keys[:up].color(:fg => :red)}\n"
-      output << "     #{keys[:left].color(:fg => :red)}     #{keys[:right].color(:fg => :red)}\n"
-      output << "        #{keys[:down].color(:fg => :red)}\n\n"
-      output << "Quit: #{keys[:quit].color(:fg => :red)}\n"
-      output << "Restart: #{keys[:restart].color(:fg => :red)}\n"
-      output << "Choose stage: #{keys[:choose_stage].color(:fg => :red)}\n"
-      output << "Toggle help: #{keys[:help].color(:fg => :red)}"
+      output << "        #{keys[:up].color(:red)}\n"
+      output << "     #{keys[:left].color(:red)}     #{keys[:right].color(:red)}\n"
+      output << "        #{keys[:down].color(:red)}\n\n"
+      output << "Quit: #{keys[:quit].color(:red)}\n"
+      output << "Restart: #{keys[:restart].color(:red)}\n"
+      output << "Choose stage: #{keys[:choose_stage].color(:red)}\n"
+      output << "Toggle help: #{keys[:help].color(:red)}"
     else
-      output =  "Press #{keys[:help].color(:fg => :red)} for help"
+      output =  "Press #{keys[:help].color(:red)} for help"
     end
     output
   end

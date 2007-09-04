@@ -7,7 +7,7 @@ class StageChooser
     stage_names = @choices.map{|f| File.basename(f)}
 
     system("clear")
-    puts "Pick a stage:\n\n".color(:fg => :yellow)
+    puts "Pick a stage:\n\n".color(:yellow)
     HighLine.new.choose do |m|
       m.choices(*stage_names)
       m.flow = :columns_down
